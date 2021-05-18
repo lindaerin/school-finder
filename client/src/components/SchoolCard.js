@@ -79,16 +79,16 @@ function Card({ content, name, id, bookmark, userID}) {
             </div>
           </div>
         </div>
-        
+         
         <div className="card-body card-text text-center ">
           <div className="col"><p>{content.location.split(" (")[0]}</p></div>
           <div className="dropdown-divider"></div>
           <div className="col"><p>{content.subway}</p></div>
           <div className="dropdown-divider"></div>
           <div className="col"><p>{content.bus} </p></div>
-          <button className="btn" type="button"  
+          <button className="btn"  type="button"  
                         aria-haspopup="true" aria-expanded="true">
-                    Show more info
+                    <a style={{color:"white"}} href={`/school/${id}`} target="_blank" >Show more info</a>
                     <span className="caret"></span>
                 </button>
         </div>

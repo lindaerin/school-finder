@@ -2,8 +2,9 @@ import React, {useState, props} from 'react';
 import "../styles/homePage.css";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import {Alert} from 'react-bootstrap'
+import { Redirect} from "react-router";
 
-  const styles = {
+const styles = {
       zIndex: "1"
   }
   const handleOnSearch = (string, results) => {
@@ -14,7 +15,8 @@ import {Alert} from 'react-bootstrap'
 
   const handleOnSelect = (item) => {
     // the item selected
-    console.log('OnSelect',item)
+    console.log('OnSelect',item);
+    window.open(`/school/${item.dbn}`,"_blank")
   }
 
   const handleOnFocus = () => {
