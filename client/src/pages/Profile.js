@@ -2,7 +2,7 @@ import React, {useState, useEffect, props} from "react";
 
 import { Container} from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import Rating from 'react-simple-star-rating';
+import Rating from '@material-ui/lab/Rating';
 import '../styles/theme.css';
 import {data} from 'jquery';
 import {Tabs, Tab} from "react-bootstrap";
@@ -66,10 +66,9 @@ export default function Profile() {
                       <h5 className="card-title">{data.reviewerEmail}</h5>
                       <p className="card-text">{data.description}</p>
                       <Rating
-                        ratingValue={data.rating}
-                        size={20}
-                        fillColor='orange'
-                        emptyColor='gray'
+                        name="simple-controlled"
+                        value={data.rating}
+                        readOnly
                       />
                     </div>
                   </div>
