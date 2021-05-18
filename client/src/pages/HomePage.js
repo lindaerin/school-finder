@@ -49,7 +49,7 @@ const HomePage = () => {
       })
       .catch(err => console.log("API ERROR: ", err));
       if(currentUser){
-        fetch(`https://postgres://snhfxnmsjmbywz:76e11c704b2fff1293abd48afb8f3e6898d86186ebed51d00438d7da679869d2@ec2-54-167-152-185.compute-1.amazonaws.com:5432/d655ke5fucpt89/api/bookmarks/bookmarkedSchools`, {
+        fetch(`http://localhost:8080/api/bookmarks/bookmarkedSchools`, {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',

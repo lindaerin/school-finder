@@ -18,7 +18,7 @@ export default function Profile() {
   
 
   useEffect(() => {
-    fetch(`https://localhost:8080/api/review/user`, {
+    fetch(`http://localhost:8080/api/review/user`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export default function Profile() {
             console.error('Error:', error);
         });
 
-    fetch(`https://localhost:8080/api/bookmarks/bookmarkedSchools`, {
+    fetch(`http://localhost:8080/api/bookmarks/bookmarkedSchools`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

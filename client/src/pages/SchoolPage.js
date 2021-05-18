@@ -57,7 +57,7 @@ const SchoolPage = () => {
             } )
             .catch(e=> {console.log(e);})
 
-        fetch(`https://localhost:8080/api/review/school`, {
+        fetch(`http://localhost:8080/api/review/school`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
