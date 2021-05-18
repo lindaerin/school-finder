@@ -47,10 +47,10 @@ function AboutUsPage(props) {
           <div className="col-lg-6 col-sm-6 mb-5">
             <div class="bg-white rounded shadow-sm py-5 px-4">
               <img />
-              <h6 class="mb-0">Patrick Chae</h6>
+              <h6 class="mb-0">Patrick Chaca</h6>
                 <ul class="social mb-0 list-inline mt-3">
-                  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-github"></i></a></li>
-                  <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+                  <li class="list-inline-item"><a href="https://github.com/chacapatrick" target="_blank"  rel="noreferrer" class="social-link"><i class="fa fa-github"></i></a></li>
+                  <li class="list-inline-item"><a href="https://www.linkedin.com/in/chacapatrick/" target="_blank"  rel="noreferrer" class="social-link"><i class="fa fa-linkedin"></i></a></li>
                 </ul>
             </div>
           </div>
@@ -60,8 +60,8 @@ function AboutUsPage(props) {
               <img />
               <h6 class="mb-0">Linda Li</h6>
                 <ul class="social mb-0 list-inline mt-3">
-                  <li class="list-inline-item"><a href="https://github.com/lindaerin" class="social-link"><i class="fa fa-github"></i></a></li>
-                  <li class="list-inline-item"><a href="https://www.linkedin.com/in/lindaerin/" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+                  <li class="list-inline-item"><a href="https://github.com/lindaerin" target="_blank"  rel="noreferrer" class="social-link"><i class="fa fa-github"></i></a></li>
+                  <li class="list-inline-item"><a href="https://www.linkedin.com/in/lindaerin/" target="_blank"  rel="noreferrer" class="social-link"><i class="fa fa-linkedin"></i></a></li>
                 </ul>
             </div>
           </div>
@@ -71,8 +71,8 @@ function AboutUsPage(props) {
               <img />
               <h6 class="mb-0">William Lee</h6>
                 <ul class="social mb-0 list-inline mt-3">
-                  <li class="list-inline-item"><a href="https://github.com/wlee004" class="social-link"><i class="fa fa-github"></i></a></li>
-                  <li class="list-inline-item"><a href="https://www.linkedin.com/in/william-lee004/" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+                  <li class="list-inline-item"><a href="https://github.com/wlee004" target="_blank"  rel="noreferrer" class="social-link"><i class="fa fa-github"></i></a></li>
+                  <li class="list-inline-item"><a href="https://www.linkedin.com/in/william-lee004/" target="_blank"  rel="noreferrer" class="social-link"><i class="fa fa-linkedin"></i></a></li>
                 </ul>
             </div>
           </div>
@@ -82,8 +82,8 @@ function AboutUsPage(props) {
               <img />
               <h6 class="mb-0">Josephine Pho</h6>
                 <ul class="social mb-0 list-inline mt-3">
-                  <li class="list-inline-item"><a href="https://github.com/jpho8799" class="social-link"><i class="fa fa-github"></i></a></li>
-                  <li class="list-inline-item"><a href="https://www.linkedin.com/in/josephine-pho/" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+                  <li class="list-inline-item"><a href="https://github.com/jpho8799" target="_blank"  rel="noreferrer" class="social-link"><i class="fa fa-github"></i></a></li>
+                  <li class="list-inline-item"><a href="https://www.linkedin.com/in/josephine-pho/" target="_blank"  rel="noreferrer" class="social-link"><i class="fa fa-linkedin"></i></a></li>
                 </ul>
             </div>
           </div>

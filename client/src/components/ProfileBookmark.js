@@ -11,7 +11,7 @@ function Bookmark({schoolName, schoolID, userID}) {
   function setUserBookmark(){
     if(userID){
       if(active){ // delete bookmark
-        fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/delete`, {
+        fetch(`http://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/delete`, {
                   method: 'DELETE',
                   headers: {
                       'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ function Bookmark({schoolName, schoolID, userID}) {
   }
   
   return (
-    <div className="col-10 col-md-8 col-lg-10 m-auto pt-4">
+    <div className="col-10 col-md-8 col-lg-10 mx-auto">
       <div className="card mb-4 shadow">
         <div className="card-header " style={{textAlign:"center"}}>
           <div className="row">
@@ -53,7 +53,7 @@ function Bookmark({schoolName, schoolID, userID}) {
         <div className="card-body card-text text-center ">
           <button className="btn" type="button"  
                         aria-haspopup="true" aria-expanded="true">
-                    Show more info
+                    <a style={{color:"white"}} href={`/school/${schoolID}`} target="_blank"  rel="noreferrer">Show more info</a>
                     <span className="caret"></span>
                 </button>
         </div>

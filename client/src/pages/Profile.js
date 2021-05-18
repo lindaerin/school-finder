@@ -18,7 +18,7 @@ export default function Profile() {
   
 
   useEffect(() => {
-    fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/review/user`, {
+    fetch(`http://${process.env.REACT_APP_BACKEND_URL}/api/review/user`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export default function Profile() {
             console.error('Error:', error);
         });
 
-    fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/bookmarkedSchools`, {
+    fetch(`http://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/bookmarkedSchools`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -56,11 +56,11 @@ export default function Profile() {
   function UserReviewCard ({reviews}) {
     
     return(
-        <div className="container">
+        <div className="container m-auto">
             {
               reviews ? reviews.map((data) => {
                 return(
-                  <div className="card">
+                  <div className="card ">
                     <h5 className="card-header">{data.schoolName}</h5>
                     <div className="card-body">
                       <h5 className="card-title">{data.reviewerEmail}</h5>
@@ -85,20 +85,27 @@ export default function Profile() {
   return (
     <div>
       <Container>
-        <h2>Profile Page</h2>
+        <h2 className="text-center">Profile Page</h2>
         <div className="text-center mt-2">
           <strong>Email:{currentUser.email}</strong>
         </div>
       </Container>
-     {
-       userBookmark && userBookmark.map((bookmark, index) => {
-         return(
-          <Bookmark schoolName={bookmark["schoolName"]} schoolID={bookmark["schoolDBID"]} userID={currentUser.uid}/>
-         );
-       })
-     }
-      
-      <UserReviewCard reviews={userReviewData}/>
+      <div className="row">
+        <div className="col">
+          <h2 className="text-center">Bookmarks</h2>
+          {
+            userBookmark && userBookmark.map((bookmark, index) => {
+              return(
+                <Bookmark schoolName={bookmark["schoolName"]} schoolID={bookmark["schoolDBID"]} userID={currentUser.uid}/>
+              );
+            })
+          }
+      </div>
+      <div className="col">
+        <h2 className="text-center">Reviews</h2>
+        <UserReviewCard reviews={userReviewData}/>
+      </div>
+      </div>
          
       
     </div>

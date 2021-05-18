@@ -21,7 +21,7 @@ function Card({ content, name, id, bookmark, userID}) {
   function setUserBookmark(){
     if(userID){
       if(active){ // delete bookmark
-        fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/delete`, {
+        fetch(`http://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/delete`, {
                   method: 'DELETE',
                   headers: {
                       'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ function Card({ content, name, id, bookmark, userID}) {
               });
       }
       else if(!active){ // add bookmark
-        fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/add`, {
+        fetch(`http://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/add`, {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
