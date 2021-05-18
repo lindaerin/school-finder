@@ -49,7 +49,7 @@ const HomePage = () => {
       })
       .catch(err => console.log("API ERROR: ", err));
       if(currentUser){
-        fetch('http://localhost:8080/api/bookmarks/bookmarkedSchools', {
+        fetch(`http://${process.env.DATABASE_URL}/api/bookmarks/bookmarkedSchools`, {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
