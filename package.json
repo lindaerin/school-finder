@@ -1,6 +1,9 @@
 {
   "name": "api-backend",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.x"
+  },
   "description": "An api backend",
   "main": "index.js",
   "scripts": {
