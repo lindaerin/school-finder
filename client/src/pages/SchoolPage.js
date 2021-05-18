@@ -57,7 +57,7 @@ const SchoolPage = () => {
             } )
             .catch(e=> {console.log(e);})
 
-        fetch(`https://${process.env.DATABASE_URL}/api/review/school`, {
+        fetch(`https://localhost:8080/api/review/school`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

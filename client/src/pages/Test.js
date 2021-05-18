@@ -17,7 +17,7 @@ export default function Test() {
   const [key, setKey] = useState('bookmark'); 
   
   useEffect(() => {
-    fetch(`https://${process.env.DATABASE_URL}/api/review/user`, {
+    fetch(`https://localhost:8080/api/review/user`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export default function Test() {
     
         let schoolDBID = data.schoolDBID;
         
-        fetch(`https://${process.env.DATABASE_URL}/api/review/deleteReview`, {
+        fetch(`https://localhost:8080/api/review/deleteReview`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
