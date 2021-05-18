@@ -49,7 +49,7 @@ const HomePage = () => {
       })
       .catch(err => console.log("API ERROR: ", err));
       if(currentUser){
-        fetch(`http://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/bookmarkedSchools`, {
+        fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/bookmarkedSchools`, {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',

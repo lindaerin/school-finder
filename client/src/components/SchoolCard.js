@@ -21,7 +21,7 @@ function Card({ content, name, id, bookmark, userID}) {
   function setUserBookmark(){
     if(userID){
       if(active){ // delete bookmark
-        fetch(`http://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/delete`, {
+        fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/delete`, {
                   method: 'DELETE',
                   headers: {
                       'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ function Card({ content, name, id, bookmark, userID}) {
               });
       }
       else if(!active){ // add bookmark
-        fetch(`http://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/add`, {
+        fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/add`, {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ function Card({ content, name, id, bookmark, userID}) {
           <div className="col"><p>{content.bus} </p></div>
           <button className="btn"  type="button"  
                         aria-haspopup="true" aria-expanded="true">
-                    <a style={{color:"white"}} href={`/school/${id}`} target="_blank" >Show more info</a>
+                    <a style={{color:"white"}} href={`/school/${id}`} target="_blank"  rel="noreferrer">Show more info</a>
                     <span className="caret"></span>
                 </button>
         </div>

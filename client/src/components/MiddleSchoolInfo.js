@@ -31,7 +31,7 @@ const MiddleSchoolInfo = ({data, userReviewData}) => {
                     <div className="card-body dark-purple">
                         <h3 className="card-title">Contact</h3>
                         <p className="card-text">Phone: {data.telephone}</p>
-                        <a href={`http://${data.independentwebsite}`} target="_blank">{data.independentwebsite}</a>
+                        <a href={`https://${data.independentwebsite}`} target="_blank">{data.independentwebsite}</a>
                     </div>
                 </div>
             </div>
