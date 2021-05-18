@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import "../styles/homePage.css";
 import CompareForm from "../components/CompareForm";
+import SchoolDropdown from "../components/SchoolDropdown";
+import {
+  elementarySchoolData,
+  middleSchoolData,
+  highSchoolData,
+} from "../utils/schoolDataFields.js";
+import CompareSchools from "../components/CompareSchools";
 
 export default function Compare() {
   const [loading, setLoading] = useState(true);
@@ -10,54 +17,64 @@ export default function Compare() {
   const [startCompare, setStartCompare] = useState(0);
   const [schoolOne, setSchoolOne] = useState({});
   const [schoolTwo, setSchoolTwo] = useState({});
+  const [schoolGrade, setSchoolGrade] = useState(null);
+  const [url, setUrl] = useState(null);
 
   useEffect(() => {
-    const options = {
-      type: "GET",
-      data: {
-        $limit: 5000,
-        $$app_token: "YOURAPPTOKENHEREs",
-      },
-    };
-    fetch("https://data.cityofnewyork.us/resource/qpj9-6qjn.json", options)
-      .then((res) => res.json())
-      .then((data) => {
-        let tempItems = [];
-        let tempComp = [];
-        let index = 0;
-        data.forEach((e) => {
-          tempItems.push({
-            id: index++,
-            dbn: e.dbn,
-            school_name: e.school_name,
-            grades2020: e.grades2020,
-            total_students: e.total_students,
-            school_accessibility: e.school_accessibility,
-            psal_sports_boys: e.psal_sports_boys,
-            psal_sports_girls: e.psal_sports_boys,
-            psal_sports_coed: e.psal_sports_coed,
-            advancedplacement_courses: e.advancedplacement_courses,
-            academicopportunities1: e.academicopportunities1,
-            academicopportunities2: e.academicopportunities2,
-            academicopportunities3: e.academicopportunities3,
-            academicopportunities4: e.academicopportunities4,
-            academicopportunities5: e.academicopportunities5,
-            addtl_info1: e.addtl_info1,
+    if (url !== null) {
+      let dataFields;
+      switch (schoolGrade) {
+        case "elementary":
+          dataFields = elementarySchoolData;
+          break;
+        case "middle":
+          dataFields = middleSchoolData;
+          break;
+        case "highschool":
+          dataFields = highSchoolData;
+          break;
+      }
+      const options = {
+        type: "GET",
+        data: {
+          $limit: 5000,
+          $$app_token: "YOURAPPTOKENHEREs",
+        },
+      };
+      fetch(url, options)
+        .then((res) => res.json())
+        .then((data) => {
+          let tempItems = [];
+          let tempComp = [];
+          let index = 0;
+          data.forEach((e) => {
+            let infoItem = {};
+            infoItem.id = index++;
+            dataFields.forEach((dataField) => {
+              infoItem[dataField] = e[dataField];
+            });
+
+            tempItems.push(infoItem);
+            tempComp[e.school_name] = e.dbn;
           });
-          tempComp[e.school_name] = e.dbn;
-        });
-        setItems(tempItems);
-        setCompItems(tempComp);
-        setLoading(false);
-      })
-      .catch((err) => console.log("API ERROR: ", err));
-    // fetch for all of user's review
-  }, []);
+          setItems(tempItems);
+          setCompItems(tempComp);
+          setLoading(false);
+        })
+        .catch((err) => console.log("API ERROR: ", err));
+      // fetch for all of user's review
+    }
+  }, [url]);
 
   const setSchools = (e) => {
     e.preventDefault();
 
     setStartCompare(startCompare + 1);
+  };
+
+  const handleDropdown = (schoolGrade, url) => {
+    setSchoolGrade(schoolGrade);
+    setUrl(url);
   };
 
   return (
@@ -69,103 +86,45 @@ export default function Compare() {
         <div className="text-center mt-2">
           <h2>Compare Schools</h2>
         </div>
-        <div className="">
-          <CompareForm
-            items={items}
-            compItems={compItems}
-            makeComparison={startCompare}
-            setSchoolTwo={(school) => setSchoolTwo(school)}
-            setSchoolOne={(school) => setSchoolOne(school)}
-          />
-        </div>
-        <div className="text-center" style={{ marginTop: "20px" }}>
-          <button
-            type="submit"
-            className="btn btn-primary btn-lg"
-            style={{ borderRadius: "40px", fontSize: "20x" }}
-            onClick={(e) => setSchools(e)}
-          >
-            Compare
-          </button>
-        </div>
+        <SchoolDropdown
+          schoolGrade={(schoolGrade, url) => handleDropdown(schoolGrade, url)}
+        />
+        {schoolGrade && (
+          <>
+            <div className="">
+              <CompareForm
+                schoolGrade={schoolGrade}
+                items={items}
+                compItems={compItems}
+                makeComparison={startCompare}
+                schoolOne={schoolOne}
+                schoolTwo={schoolTwo}
+                setSchoolTwo={(school) => setSchoolTwo(school)}
+                setSchoolOne={(school) => setSchoolOne(school)}
+              />
+            </div>
+            <div className="text-center" style={{ marginTop: "20px" }}>
+              <button
+                type="submit"
+                className="btn btn-primary btn-lg"
+                style={{ borderRadius: "40px", fontSize: "20x" }}
+                onClick={(e) => setSchools(e)}
+              >
+                Compare
+              </button>
+            </div>
+          </>
+        )}
       </Container>
 
-      <div className="main">
-        {Object.keys(schoolTwo).length > 0 && (
-          <div className="leftSchool">
-            <div className="card" style={{ width: "100%" }}>
-              <div className="card-body">
-                <h5 className="card-title">{schoolTwo.school_name}</h5>
-                <h6 className="card-subtitle mb-2 text-muted">
-                  Grades: {schoolTwo.grades2020} &nbsp; &nbsp; Total Students:{" "}
-                  {schoolTwo.total_students} &nbsp; &nbsp; Accessibility:{" "}
-                  {schoolTwo.school_accessibility}
-                </h6>
-                <hr />
-                <p className="card-text">
-                  <b>AP Courses: </b> {schoolTwo.advancedplacement_courses}
-                </p>
-                <hr />
-                <p className="card-text">
-                  <b>PSAL Sports Boys: </b> {schoolTwo.psal_sports_boys}
-                  <br />
-                  <b>PSAL Sports Girls: </b> {schoolTwo.psal_sports_girls}
-                </p>
-                <hr />
-                <p className="card-text">
-                  <b>Academic Opportunties: </b>{" "}
-                  {schoolTwo.academicopportunities1}{" "}
-                  {schoolTwo.academicopportunities2}{" "}
-                  {schoolTwo.academicopportunities3}{" "}
-                  {schoolTwo.academicopportunities4}{" "}
-                  {schoolTwo.academicopportunities5}{" "}
-                </p>
-                <hr />
-                <p className="card-text">
-                  <b>Additional Info: </b> {schoolTwo.addtl_info1}
-                </p>
-              </div>
-            </div>
-          </div>
+      {Object.keys(schoolOne).length > 0 &&
+        Object.keys(schoolTwo).length > 0 && (
+          <CompareSchools
+            schoolGrade={schoolGrade}
+            schoolOne={schoolOne}
+            schoolTwo={schoolTwo}
+          />
         )}
-        {Object.keys(schoolOne).length > 0 && (
-          <div className="rightSchool">
-            <div className="card" style={{ width: "100%" }}>
-              <div className="card-body">
-                <h5 className="card-title">{schoolOne.school_name}</h5>
-                <h6 className="card-subtitle mb-2 text-muted">
-                  Grades: {schoolOne.grades2020} &nbsp; &nbsp; Total Students:{" "}
-                  {schoolOne.total_students} &nbsp; &nbsp; Accessibility:{" "}
-                  {schoolOne.school_accessibility}
-                </h6>
-                <hr />
-                <p className="card-text">
-                  <b>AP Courses: </b> {schoolOne.advancedplacement_courses}
-                </p>
-                <hr />
-                <p className="card-text">
-                  <b>PSAL Sports Boys: </b> {schoolOne.psal_sports_boys}
-                  <br />
-                  <b>PSAL Sports Girls: </b> {schoolOne.psal_sports_girls}
-                </p>
-                <hr />
-                <p className="card-text">
-                  <b>Academic Opportunties: </b>{" "}
-                  {schoolOne.academicopportunities1}{" "}
-                  {schoolOne.academicopportunities2}{" "}
-                  {schoolOne.academicopportunities3}{" "}
-                  {schoolOne.academicopportunities4}{" "}
-                  {schoolOne.academicopportunities5}{" "}
-                </p>
-                <hr />
-                <p className="card-text">
-                  <b>Additional Info: </b> {schoolOne.addtl_info1}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
     </div>
   );
 }
