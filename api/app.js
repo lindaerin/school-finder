@@ -4,7 +4,7 @@ const path = require('path');
 const db = require('./models');
 const app = express();
 const PORT = process.env.PORT;
-
+console.log(PORT)
 // this lets us parse 'application/json' content in http requests
 app.use(express.json());
 var allowCrossDomain = function(req, res, next) {

@@ -49,7 +49,7 @@ const HomePage = () => {
       })
       .catch(err => console.log("API ERROR: ", err));
       if(currentUser){
-        fetch(`http://localhost:8080/api/bookmarks/bookmarkedSchools`, {
+        fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/bookmarkedSchools`, {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
@@ -66,7 +66,8 @@ const HomePage = () => {
               });
         }
   }, [])
-  
+  console.log(process.env.REACT_APP_BACKEND_URL)
+  console.log(process.env.REACT_APP_FIREBASE_API_KEY)
   const selectedSchoolCallback = ( childData ) =>{
     if(childData && childData.length===0){
       setSelectedSchools(null)

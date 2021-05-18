@@ -11,7 +11,7 @@ function Bookmark({schoolName, schoolID, userID}) {
   function setUserBookmark(){
     if(userID){
       if(active){ // delete bookmark
-        fetch(`http://localhost:8080/api/bookmarks/delete`, {
+        fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/delete`, {
                   method: 'DELETE',
                   headers: {
                       'Content-Type': 'application/json',
