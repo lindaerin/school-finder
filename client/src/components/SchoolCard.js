@@ -21,7 +21,7 @@ function Card({ content, name, id, bookmark, userID}) {
   function setUserBookmark(){
     if(userID){
       if(active){ // delete bookmark
-        fetch(`http://${process.env.DATABASE_URL}/api/bookmarks/delete`, {
+        fetch(`https://${process.env.DATABASE_URL}/api/bookmarks/delete`, {
                   method: 'DELETE',
                   headers: {
                       'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ function Card({ content, name, id, bookmark, userID}) {
               });
       }
       else if(!active){ // add bookmark
-        fetch(`http://${process.env.DATABASE_URL}/api/bookmarks/add`, {
+        fetch(`https://${process.env.DATABASE_URL}/api/bookmarks/add`, {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',

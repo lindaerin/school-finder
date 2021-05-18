@@ -102,7 +102,7 @@ export default function Review() {
         //fetch request needs to check if reviewer already submitted a review for this school
 
         //Change according to deployed backend after we deploy
-        fetch(`http://${process.env.DATABASE_URL}/api/review/addReview`, {
+        fetch(`https://${process.env.DATABASE_URL}/api/review/addReview`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
