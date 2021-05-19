@@ -3,7 +3,7 @@ import Map from '../components/SchoolMap';
 import ReviewCard from "../components/ReviewCard";
 import "../styles/schoolPage.css";
 const HighSchoolInfo = ({data, userReviewData}) => {
-    const school_website = "http://" + data.website;
+const school_website = "http://" + data.website;
 
     return (
         <div>
