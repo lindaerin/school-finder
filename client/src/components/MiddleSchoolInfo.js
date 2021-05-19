@@ -7,8 +7,8 @@ const MiddleSchoolInfo = ({data, userReviewData}) => {
     return (
         <div>
             <h1 className="text-center">{data.name}</h1>
-            <div className="row shadow p-3 mb-5 bg-white rounded">
-                <div className="card col-4">
+            <div className="row m-auto shadow p-3 mb-5 bg-white rounded">
+                <div className="card col-md-4 col-sm-12">
                     <div className="card-body dark-purple">
                         <h3 class="card-title">General</h3>
                         <p className="card-text">Grades: {data.gradespan}</p>
@@ -17,7 +17,7 @@ const MiddleSchoolInfo = ({data, userReviewData}) => {
                         <p>Accessibility: {data.accessibility_description}</p>
                  </div>
                 </div>
-                <div className="card col-4">
+                <div className="card col-md-4 col-sm-12">
                      <div className="card-body dark-purple">
                         <h3 className="card-title">Location</h3>
                         <h6 className="card-subtitle mb-2">Borough: {data.borough}</h6>
@@ -27,7 +27,7 @@ const MiddleSchoolInfo = ({data, userReviewData}) => {
                         <p className="card-text">Bus: {data.bus}</p>
                      </div>
                </div>
-                <div className="card col-4">
+                <div className="card col-md-4 col-sm-12">
                     <div className="card-body dark-purple">
                         <h3 className="card-title">Contact</h3>
                         <p className="card-text">Phone: {data.telephone}</p>
@@ -44,8 +44,8 @@ const MiddleSchoolInfo = ({data, userReviewData}) => {
             
                 </div>
             </div>
-            <div className="row shadow p-3 mb-5 bg-white rounded">
-                <div className="card col-6">
+            <div className="row m-auto shadow p-3 mb-5 bg-white rounded">
+                <div className="card col-md-6 col-sm-12">
                     <div className="card-body dark-purple">
                         <div class = "col-8">
                             <h3 className="card-title">Adcademics</h3>
@@ -56,7 +56,7 @@ const MiddleSchoolInfo = ({data, userReviewData}) => {
                         </div>
                     </div>
                 </div>
-                <div className="card col-6">
+                <div className="card col-md-6 col-sm-12">
                     <div className="card-body dark-purple">
                         <div class = "col-8">
                         <h3 className="card-title">Activties</h3>

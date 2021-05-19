@@ -7,8 +7,8 @@ const ElementarySchoolInfo = ({data, userReviewData}) => {
     return (
         <div>
             <h1 className="text-center">{data.school_name}</h1>
-            <div className="row shadow p-3 mb-5 bg-white rounded">
-                <div class="card col-4 ">
+            <div className="row m-auto shadow p-3 mb-5 bg-white rounded">
+                <div class="card col-md-4 col-sm-12 ">
                     <div class="card-body dark-purple">
                         <h3 class="card-title">General</h3>
                         <p class="card-text">Grades: {data.grades}</p>
@@ -17,7 +17,7 @@ const ElementarySchoolInfo = ({data, userReviewData}) => {
                     </div>
                 </div>
 
-                <div class="card col-4">
+                <div class="card col-md-4 col-sm-12">
                     <div class="card-body dark-purple">
                         <h3 class="card-title">Location</h3>
                         <h6 class="card-subtitle mb-2">Borough: {data.borough}</h6>
@@ -25,7 +25,7 @@ const ElementarySchoolInfo = ({data, userReviewData}) => {
                     </div>
                 </div>
 
-                <div class="card col-4 ">
+                <div class="card col-md-4 col-sm-12 ">
                     <div class="card-body dark-purple">
                         <h3 class="card-title">Contact</h3>
                         <p class="card-text">Phone: {data.phone}</p>

@@ -11,7 +11,7 @@ const FilterRow = (props) => {
         sports: [[],[],[]],
         subway: [],
         postcode: [],
-        accessbility: [],
+        accessibility: [],
     }
     const [checked_boxes, setCheckedBoxes] = useState({
         borough: [],
@@ -20,7 +20,7 @@ const FilterRow = (props) => {
         sports: [[],[],[]],
         subway: [],
         postcode: [],
-        accessbility: [],
+        accessibility: [],
     }) 
 
 
@@ -141,19 +141,19 @@ const FilterRow = (props) => {
                     filter["sports"][2].push(current_sports)
                 }
             }
-            //Accessbility
+            //accessibility
             for(i =45; i<48 ; i++){
                 //console.log(e.target[i]); 
-                var current_accessbility = e.target[i].labels[0].innerText.trim()
-                if(filter["accessbility"].includes(current_accessbility) && e.target[i].checked===false){
+                var current_accessibility = e.target[i].labels[0].innerText.trim()
+                if(filter["accessibility"].includes(current_accessibility) && e.target[i].checked===false){
                     if(e.target[i].checked===true){
-                        filter["accessbility"].push(current_accessbility) //Adds the grade_range to the array
+                        filter["accessibility"].push(current_accessibility) //Adds the grade_range to the array
                     }
-                    index = filter["accessbility"].indexOf(current_accessbility);
-                    filter["accessbility"].splice( index, 1 );
+                    index = filter["accessibility"].indexOf(current_accessibility);
+                    filter["accessibility"].splice( index, 1 );
                 }
-                else if (e.target[i].checked===true && !filter["accessbility"].includes(current_accessbility)){
-                    filter["accessbility"].push(current_accessbility)
+                else if (e.target[i].checked===true && !filter["accessibility"].includes(current_accessibility)){
+                    filter["accessibility"].push(current_accessibility)
                 }
             }
             
@@ -174,9 +174,9 @@ const FilterRow = (props) => {
         sports: [[],[],[]],
         subway: [],
         postcode: [],
-        accessbility: [],
+        accessibility: [],
         */
-    if (filterOption.borough.length > 0 || filterOption.advancedplacement_courses.length > 0 || filterOption.sports[0].length > 0 || filterOption.sports[1].length > 0|| filterOption.sports[2].length > 0|| filterOption.subway.length > 0 || filterOption.postcode.length > 0|| filterOption.accessbility.length > 0 ){
+    if (filterOption.borough.length > 0 || filterOption.advancedplacement_courses.length > 0 || filterOption.sports[0].length > 0 || filterOption.sports[1].length > 0|| filterOption.sports[2].length > 0|| filterOption.subway.length > 0 || filterOption.postcode.length > 0|| filterOption.accessibility.length > 0 ){
         //Start off with all the data
         var temp = props.data;
         //Fillin this temp
@@ -362,23 +362,40 @@ const FilterRow = (props) => {
         
 
         
-        if(filterOption["accessbility"].length !== 0){
+        if(filterOption["accessibility"].length !== 0){
             if(temp2.length===0){
                 
-                filterOption["accessbility"].forEach((e)=>{
-                    temp2 = temp2.concat(temp.filter((dict,n) => {return dict["school_accessibility"] === e}))
+                filterOption["accessibility"].forEach((e)=>{
+                    temp2 = temp2.concat(temp.filter((dict,n) => {
+                        if(dict["school_accessibility"]){
+                            return dict["school_accessibility"] === e
+                        }
+                        if(dict["accessibility_description"]){
+                            return dict["accessibility_description"] === e
+                        }
+                        if(dict["accessibility"]){
+                            return dict["accessibility"] === e
+                        }
+                        
+                    }))
                     
                 })
 
             }
             else{
                 var setTemp = []
-                filterOption["accessbility"].forEach((e)=>{
+                filterOption["accessibility"].forEach((e)=>{
                     var temp3 = temp2;
-                    console.log("TEMP3", temp3)
-                    console.log("setTEMP", setTemp)
                     temp3 = temp3.filter((dict,n) => {
-                        return dict["school_accessibility"].includes(e);
+                        if(dict["school_accessibility"]){
+                            return dict["school_accessibility"] === e
+                        }
+                        if(dict["accessibility_description"]){
+                            return dict["accessibility_description"] === e
+                        }
+                        if(dict["accessibility"]){
+                            return dict["accessibility"] === e
+                        }
         
                     })
                     setTemp = setTemp.concat(temp3)
@@ -832,10 +849,10 @@ const FilterRow = (props) => {
                             })
                         }
                         <div className="dropdown-divider"></div>
-                        <p  className = "text-center"> <strong>Accessbility</strong></p>
+                        <p  className = "text-center"> <strong>Accessibility</strong></p>
                         {
                             ['Not Accessible', 'Partially Accessible', 'Fully Accessible'].map((e) => {
-                                if(checked_boxes["accessbility"].includes(e)){
+                                if(checked_boxes["accessibility"].includes(e)){
                                     return(
                                         <li key={e}>
                                             <label>
@@ -872,6 +889,18 @@ const FilterRow = (props) => {
         Object.keys(checked_boxes).forEach( (element) => filter[element] = checked_boxes[element])
         
     },[checked_boxes])
+
+    useEffect(()=>{
+        setCheckedBoxes({
+            borough: [],
+            advancedplacement_courses: [],
+            //[0] = psal_sports_boys, [1] = psal_sports_girls, [2] = psal_sports_coed
+            sports: [[],[],[]],
+            subway: [],
+            postcode: [],
+            accessibility: [],
+        })
+    }, [props.schoolGrade])
     
     return(
         <div className="row justify-content-center m-auto">

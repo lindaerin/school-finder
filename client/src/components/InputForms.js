@@ -1,29 +1,41 @@
-import React, {useState, props} from 'react';
+import React, {useState, props, useEffect} from 'react';
 import "../styles/homePage.css";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import {Alert} from 'react-bootstrap'
 import { Redirect} from "react-router";
 
-const styles = {
+
+
+const SchoolForm = ({items, compItems, schoolGrade}) => {
+    const [resultString, setResultString] = useState('school_name');
+    const [resultStringDBN, setResultStringDBN] = useState('dbn')
+    useEffect(() => {
+      if(schoolGrade === "elementary" || schoolGrade === "highschool") {
+        setResultString("school_name")
+        setResultStringDBN("dbn")
+      } else if(schoolGrade === "middle") {
+        setResultString("name")
+        setResultStringDBN("schooldbn")
+      }
+    }, [schoolGrade])
+    const styles = {
       zIndex: "1"
   }
-  const handleOnSearch = (string, results) => {
-    // onSearch will have as the first callback parameter
-    // the string searched and for the second the results.
-    console.log('OnSearch', string, results)
-  }
+    const handleOnSearch = (string, results) => {
+      // onSearch will have as the first callback parameter
+      // the string searched and for the second the results.
+      console.log('OnSearch', string, results)
+    }
 
-  const handleOnSelect = (item) => {
-    // the item selected
-    console.log('OnSelect',item);
-    window.open(`/school/${item.dbn}`,"_blank")
-  }
+    const handleOnSelect = (item) => {
+      // the item selected
+      console.log('OnSelect',item);
+      window.open(`/school/${item[resultStringDBN]}`,"_blank")
+    }
 
-  const handleOnFocus = () => {
-    console.log('Focused')
-  }
-
-const SchoolForm = ({items, compItems}) => {
+    const handleOnFocus = () => {
+      console.log('Focused')
+    }
     const [error, setError] = useState('')
     
     const formSubmit = (e) =>{
@@ -46,8 +58,8 @@ const SchoolForm = ({items, compItems}) => {
                 onSearch={handleOnSearch}
                 onSelect={handleOnSelect}
                 onFocus={handleOnFocus}
-                fuseOptions={{ keys:["school_name"] }}
-                resultStringKeyName= "school_name"
+                fuseOptions={{ keys:[resultString] }}
+                resultStringKeyName= {resultString}
                 styling ={styles}
                 placeholder="Search School Name"
                 autoFocus
@@ -59,26 +71,11 @@ const SchoolForm = ({items, compItems}) => {
     );
     
 }
-const AddressForm = (props) => {
-    return(
-        <form>
-            <div className="form-group inputSetting ">
-                <ReactSearchAutocomplete 
-                    items={props.items}
-                    onSearch={handleOnSearch}
-                    onSelect={handleOnSelect}
-                    onFocus={handleOnFocus}
-                    placeholder="Enter Address"
-                    autoFocus
-                />
-            </div>
-        </form>
-    );
-}
-const InputForm = ({items, compItems}) =>{
+
+const InputForm = ({items, compItems,schoolGrade}) =>{
     return (
       <div className="container-fluid text-center ">
-          <SchoolForm items = {items} compItems = {compItems}/>
+          <SchoolForm items = {items} compItems = {compItems} schoolGrade={schoolGrade}/>
       </div>
     );
 }

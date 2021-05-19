@@ -57,7 +57,7 @@ const SchoolPage = () => {
             } )
             .catch(e=> {console.log(e);})
 
-        fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/review/school`, {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/review/school`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

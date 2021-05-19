@@ -6,47 +6,124 @@ import L from 'leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 //GOOGLE MAP
-function Map({highSchoolData}) {
+function Map({schoolData ,schoolGrade}) {
 const [code, setCode] = useState();
 const [addresses, setAddresses] = useState();
 const [positions, setPositions] = useState();
 
 useEffect(() => {
-    if(highSchoolData){
+  if(schoolData){
     let addressTemp = {}
     let samePositions={}
     let tempCode = []
-    highSchoolData.forEach(school => {
-      let location = school.location.split('(')[0].trim()
-      let tempPosition = {
-        lat: parseFloat(school.latitude),
-        lng: parseFloat(school.longitude),
-      }
-      if(addressTemp[location]){
-        if(school.school_name.includes(', The')){
-        addressTemp[location].push([school.school_name.split(",")[0], school.dbn]);
-        }
-        else{
+    switch (schoolGrade) {
+      case "elementary":
+        schoolData.forEach(school => {
+          if(school.latitude && school.longitude){
+            let location = school.address 
+            let tempPosition = {
+              lat: parseFloat(school.latitude),
+              lng: parseFloat(school.longitude),
+            }
+            if(addressTemp[location]){
+              if(school.school_name.includes(', The')){
+              addressTemp[location].push([school.school_name.split(",")[0], school.schooldbn]);
+              }
+              else{
+                
+                addressTemp[location].push([school.school_name, school.schooldbn]);
+              
+              }
+              
+            }else{
+              if(school.school_name.includes(', The')){
+                addressTemp[location] = [ [school.school_name.split(",")[0], school.schooldbn] ];
+              }
+              else{
+                addressTemp[location] = [[school.school_name, school.schooldbn]];
+              }
+              samePositions[location] = tempPosition
+              tempCode.push(location)
+            }
+            
+            setAddresses(addressTemp)
+            setPositions(samePositions)
+            setCode(tempCode)
+          }
+        });
+        break;
+      case "middle":
+        schoolData.forEach(school => {
+          if(school.latitude && school.longitude){
+            let location = school.address 
+            let tempPosition = {
+              lat: parseFloat(school.latitude),
+              lng: parseFloat(school.longitude),
+            }
+            if(addressTemp[location]){
+              if(school.name.includes(', The')){
+              addressTemp[location].push([school.name.split(",")[0], school.schooldbn]);
+              }
+              else{
+                
+                addressTemp[location].push([school.name, school.schooldbn]);
+              
+              }
+              
+            }else{
+              if(school.name.includes(', The')){
+                addressTemp[location] = [ [school.name.split(",")[0], school.schooldbn] ];
+              }
+              else{
+                addressTemp[location] = [[school.name, school.schooldbn]];
+              }
+              samePositions[location] = tempPosition
+              tempCode.push(location)
+            }
+            
+            setAddresses(addressTemp)
+            setPositions(samePositions)
+            setCode(tempCode)
+          }
+        });
+        
+        break;
+      case "highschool":
+        schoolData.forEach(school => {
+          let location = school.location.split('(')[0].trim()
+          let tempPosition = {
+            lat: parseFloat(school.latitude),
+            lng: parseFloat(school.longitude),
+          }
+          if(addressTemp[location]){
+            if(school.school_name.includes(', The')){
+            addressTemp[location].push([school.school_name.split(",")[0], school.dbn]);
+            }
+            else{
+              
+              addressTemp[location].push([school.school_name, school.dbn]);
+            
+            }
+            
+          }else{
+            if(school.school_name.includes(', The')){
+              addressTemp[location] = [ [school.school_name.split(",")[0], school.dbn] ];
+            }
+            else{
+              addressTemp[location] = [[school.school_name, school.dbn]];
+            }
+            samePositions[location] = tempPosition
+            tempCode.push(location)
+          }
           
-          addressTemp[location].push([school.school_name, school.dbn]);
-        
-        }
-        
-      }else{
-        if(school.school_name.includes(', The')){
-          addressTemp[location] = [ [school.school_name.split(",")[0], school.dbn] ];
-        }
-        else{
-          addressTemp[location] = [[school.school_name, school.dbn]];
-        }
-        samePositions[location] = tempPosition
-        tempCode.push(location)
-      }
-      
-      setAddresses(addressTemp)
-      setPositions(samePositions)
-      setCode(tempCode)
-    });
+          setAddresses(addressTemp)
+          setPositions(samePositions)
+          setCode(tempCode)
+        });
+        break;
+      default:
+        break;
+    }
   }
   else{
     setAddresses(null)
@@ -54,7 +131,7 @@ useEffect(() => {
     setCode(null)
   }
 
-}, [highSchoolData])
+}, [schoolData])
 
 let DefaultIcon = L.icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png',
@@ -75,8 +152,6 @@ let DefaultIcon = L.icon({
     position: 'absolute',
     overflow: "hidden",
   };
-console.log(addresses)
-console.log(positions)
 //Change API sKEYs
     return(
       <MapContainer style={containerStyle} center={center} zoom={11} scrollWheelZoom={false}>
@@ -110,4 +185,3 @@ console.log(positions)
 }
 
 export default Map
-

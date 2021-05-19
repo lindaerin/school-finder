@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import Heart from "react-heart";
 import '../styles/homePage.css';
 
-function Card({ content, name, id, bookmark, userID}) {
+function Card({ name, id, bookmark, userID, location, secondColumn, thirdColumn}) {
 
   const [active, setActive] = useState(false);
 
   function checkBookmark(){
     for(let i = 0; i < bookmark.length; i++){ 
-      if(bookmark[i]["schoolDBID"] == id){
+      if(bookmark[i]["schoolDBID"] === id){
         setActive(true);
         return;
       } 
@@ -21,7 +21,7 @@ function Card({ content, name, id, bookmark, userID}) {
   function setUserBookmark(){
     if(userID){
       if(active){ // delete bookmark
-        fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/delete`, {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/delete`, {
                   method: 'DELETE',
                   headers: {
                       'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ function Card({ content, name, id, bookmark, userID}) {
               });
       }
       else if(!active){ // add bookmark
-        fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/add`, {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/add`, {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
@@ -79,13 +79,12 @@ function Card({ content, name, id, bookmark, userID}) {
             </div>
           </div>
         </div>
-         
         <div className="card-body card-text text-center ">
-          <div className="col"><p>{content.location.split(" (")[0]}</p></div>
+          <div className="col"><p>{location}</p></div>
           <div className="dropdown-divider"></div>
-          <div className="col"><p>{content.subway}</p></div>
+          <div className="col"><p>{secondColumn ? secondColumn : "No subway here"}</p></div>
           <div className="dropdown-divider"></div>
-          <div className="col"><p>{content.bus} </p></div>
+          <div className="col"><p>{thirdColumn} </p></div>
           <button className="btn"  type="button"  
                         aria-haspopup="true" aria-expanded="true">
                     <a style={{color:"white"}} href={`/school/${id}`} target="_blank"  rel="noreferrer">Show more info</a>

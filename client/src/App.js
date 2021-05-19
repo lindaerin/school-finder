@@ -35,6 +35,10 @@ function Navigation(props) {
       <Link className="navbar-brand" to="/">
         School Finder
       </Link>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <NavLink className="nav-link" exact to="/about-us">
@@ -42,7 +46,7 @@ function Navigation(props) {
           </NavLink>
         </li>
         {currentUser && currentUser.email ? (
-          <ul className="navbar-nav ml-auto">
+          <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink className="nav-link" exact to="/profile">
                 Profile
@@ -65,7 +69,7 @@ function Navigation(props) {
             </li>
           </ul>
         ) : (
-          <ul className="navbar-nav ml-auto">
+          <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink className="nav-link" exact to="/signup">
                 Sign Up
@@ -79,6 +83,7 @@ function Navigation(props) {
           </ul>
         )}
       </ul>
+      </div>
     </nav>
   );
 }

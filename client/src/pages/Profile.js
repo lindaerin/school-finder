@@ -18,7 +18,7 @@ export default function Profile() {
   
 
   useEffect(() => {
-    fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/review/user`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/review/user`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export default function Profile() {
             console.error('Error:', error);
         });
 
-    fetch(`https://${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/bookmarkedSchools`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/bookmarks/bookmarkedSchools`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

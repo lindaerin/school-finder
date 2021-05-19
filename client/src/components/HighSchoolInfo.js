@@ -8,8 +8,8 @@ const HighSchoolInfo = ({data, userReviewData}) => {
     return (
         <div>
             <h1 className="text-center ">{data.school_name}</h1>
-            <div className="row shadow p-3 mb-5 bg-white rounded">
-                <div class="card col-4 dark-purple">
+            <div className="row shadow p-3 mb-5 bg-white rounded m-auto">
+                <div class="card col-md-4 col-sm-12 dark-purple">
                     <div class="card-body col-8 ">
                         <h3 class="card-title">General</h3>
                         <p class="card-text">Grades: {data.finalgrades}</p>
@@ -19,7 +19,7 @@ const HighSchoolInfo = ({data, userReviewData}) => {
                     </div>
                 </div>
                 
-                <div class="card col-4 ">
+                <div class="card col-md-4 col-sm-12">
                     <div class="card-body dark-purple ">
                         <h3 class="card-title">Location</h3>
                         <h6 class="card-subtitle mb-2">Borough: {data.borough}</h6>
@@ -29,7 +29,7 @@ const HighSchoolInfo = ({data, userReviewData}) => {
                         <p class="card-text">Bus: {data.bus}</p>
                     </div>
                 </div>
-                <div class="card col-4">
+                <div class="card col-md-4 col-sm-12">
                     <div class="card-body dark-purple">
                         <h3 class="card-title">Contact</h3>
                         <p class="card-text">Phone: {data.phone_number}</p>
@@ -45,8 +45,8 @@ const HighSchoolInfo = ({data, userReviewData}) => {
                     <p class="text-justify align-items-center">{data.overview_paragraph}</p>
                 </div>
             </div>
-            <div className="row shadow p-3 mb-5 bg-white rounded">
-                <div class="card col-6">
+            <div className="row shadow p-3 mb-5 bg-white rounded m-auto">
+                <div class="card col-md-6 col-sm-12">
                     <div class="card-body dark-purple">
                         <div class ="col-8">
                             <h3 class="card-title">Academics</h3>
@@ -59,7 +59,7 @@ const HighSchoolInfo = ({data, userReviewData}) => {
                         </div>
                     </div>
                 </div>
-                <div class="card col-6">
+                <div class="card col-md-6 col-sm-12">
                     <div class="card-body dark-purple">
                         <div class = "col-8">
                             <h3 class="card-title">Activties</h3>
