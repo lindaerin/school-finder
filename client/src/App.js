@@ -71,6 +71,11 @@ function Navigation(props) {
         ) : (
           <ul className="navbar-nav">
             <li className="nav-item">
+              <NavLink className="nav-link" exact to="/compare">
+                Compare Schools
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" exact to="/signup">
                 Sign Up
               </NavLink>
