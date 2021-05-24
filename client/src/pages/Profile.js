@@ -52,6 +52,24 @@ export default function Profile() {
   }, [])
 
   // Review card display by User
+  function deleteReview(schoolDBID){
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/review/delete`, {
+          method: 'DELETE',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({reviewerUUID: currentUser.uid,
+                                schoolDBID: schoolDBID}),
+      })
+      .then(
+        console.log("deleted review: " + schoolDBID)
+      )
+      .catch((error) => {
+          console.error('Error:', error);
+      });
+      window.location.reload();
+      return;
+  }
 
   function UserReviewCard ({reviews}) {
     
@@ -61,7 +79,16 @@ export default function Profile() {
               reviews ? reviews.map((data) => {
                 return(
                   <div className="card ">
-                    <h5 className="card-header">{data.schoolName}</h5>
+                    <div className="card-header " style={{textAlign:"center"}}>
+                      <div className="row">
+                        <div className="col-11">
+                          <h5>{data.schoolName}</h5>
+                        </div>
+                        <div className="ml-auto" style={{ width: "2rem", height:"2rem" }}>
+                          <button type="button" className="btn btn-danger btn" onClick={() => {deleteReview(data.schoolDBID)}}>X</button>
+                        </div>
+                      </div>
+                    </div>
                     <div className="card-body">
                       <h5 className="card-title">{data.reviewerEmail}</h5>
                       <p className="card-text">{data.description}</p>
@@ -72,8 +99,7 @@ export default function Profile() {
                       />
                     </div>
                   </div>
-                )
-                
+                )    
               })
               :
               <p>No Review Data.</p>

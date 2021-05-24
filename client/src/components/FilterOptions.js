@@ -420,7 +420,7 @@ const FilterRow = (props) => {
     const BoroughFilter = () => {
         return(
             <div  className="dropdown">
-            <button className="btn dropdown-toggle" type="button" 
+            <button className="btn filter-btn dropdown-toggle" type="button" 
                     data-toggle="dropdown" 
                     aria-haspopup="true" aria-expanded="true">
                 Borough
@@ -465,7 +465,7 @@ const FilterRow = (props) => {
     const SubwayFilter = () => {
         return(
             <div  className="dropdown" >
-                <button className="btn dropdown-toggle" type="button" 
+                <button className="btn filter-btn dropdown-toggle" type="button" 
                         data-toggle="dropdown" 
                         aria-haspopup="true" aria-expanded="true">
                     Subway
@@ -713,7 +713,7 @@ const FilterRow = (props) => {
 
         return(
             <div  className="dropdown">
-                <button className="btn btn-default dropdown-toggle" type="button" 
+                <button className="btn filter-btn btn-default dropdown-toggle" type="button" 
                         data-toggle="dropdown" 
                         aria-haspopup="true" aria-expanded="true">
                     Zipcode
@@ -768,7 +768,7 @@ const FilterRow = (props) => {
     const MoreFilter = () =>{
         return(
             <div  className="dropdown">
-                <button className="btn btn-default dropdown-toggle" type="button" 
+                <button className="btn filter-btn btn-default dropdown-toggle" type="button" 
                         data-toggle="dropdown" 
                         aria-haspopup="true" aria-expanded="true">
                     More Filters

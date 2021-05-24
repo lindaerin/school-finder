@@ -46,8 +46,7 @@ router.post('/user', (req, res) => {
         });
 });
 
-router.delete('/deleteReview', (req, res, next)=>{
-   
+router.delete('/delete', (req, res, next)=>{
     Review.findOne({
         where: {
             [Op.and]:[
@@ -61,8 +60,8 @@ router.delete('/deleteReview', (req, res, next)=>{
             return res.sendStatus(404);
         }
             review.destroy();
+            console.log('Deleted review successfully');
             res.sendStatus(204);
-        
     })
 })
 module.exports = router;

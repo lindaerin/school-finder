@@ -106,7 +106,7 @@ export default function Compare() {
             <div className="text-center" style={{ marginTop: "20px" }}>
               <button
                 type="submit"
-                className="btn btn-primary btn-lg"
+                className="btn home-btn btn-primary btn-lg"
                 style={{ borderRadius: "40px", fontSize: "20x" }}
                 onClick={(e) => setSchools(e)}
               >

@@ -65,7 +65,7 @@ class PostFormPage extends React.Component {
             className="form-control mr-3 rounded"
             onChange={this.contentChanged}
           />
-          <button className="btn btn-primary" onClick={this.savePost}>Save Post</button>
+          <button className="btn home-btn btn-primary" onClick={this.savePost}>Save Post</button>
         </div>
       </div>
     );

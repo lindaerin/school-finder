@@ -3,6 +3,13 @@ import { useAuth } from "../contexts/AuthContext";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import {Alert} from 'react-bootstrap';
 import Rating from '@material-ui/lab/Rating';
+import SchoolDropdown from "../components/SchoolDropdown"; 
+import InputForm from '../components/ReviewInputForms';
+import {
+    elementarySchoolData,
+    middleSchoolData,
+    highSchoolData,
+} from "../utils/schoolDataFields.js";
 
 export default function Review() {
     const [rating, setRating] = useState(null); 
@@ -14,8 +21,58 @@ export default function Review() {
     const [loading, setLoading] = useState(true);
     const [items, setItems ]= useState([]);
     const [compItems, setCompItems] = useState([]);
+    const [schoolGrade, setSchoolGrade] = useState(null);
+    const [url, setUrl] = useState(null);
+    const [selectedSchools, setSelectedSchools] = useState(null);
+    
     
     useEffect(() => {
+        if (url !== null) {
+            let dataFields;
+            switch (schoolGrade) {
+              case "elementary":
+                dataFields = elementarySchoolData;
+                break;
+              case "middle":
+                dataFields = middleSchoolData;
+                break;
+              case "highschool":
+                dataFields = highSchoolData;
+                break;
+              default:
+                break;
+            }
+            const options = {
+              type: "GET",
+              data: {
+                $limit: 5000,
+                $$app_token: "YOURAPPTOKENHEREs",
+              },
+            };
+            fetch(url, options)
+              .then((res) => res.json())
+              .then((data) => {
+                let tempItems = [];
+                let tempComp = [];
+                let index = 0;
+                data.forEach((e) => {
+                  let infoItem = {};
+                  infoItem.id = index++;
+                  dataFields.forEach((dataField) => {
+                    infoItem[dataField] = e[dataField];
+                  });
+      
+                  tempItems.push(infoItem);
+                  tempComp[e.school_name] = e.dbn;
+                });
+                setItems(tempItems);
+                setCompItems(tempComp);
+                setJSON(data)
+                console.log(tempItems)
+              })
+              .catch((err) => console.log("API ERROR: ", err));
+            // fetch for all of user's review
+        }
         const options ={
           type: "GET",
           data: {
@@ -23,30 +80,8 @@ export default function Review() {
             "$$app_token" : "YOURAPPTOKENHEREs"
           }
         };
-        fetch("https://data.cityofnewyork.us/resource/qpj9-6qjn.json", options)
-          .then(res => res.json())
-          .then(data => {
-            let tempItems = []
-            let tempComp = []
-            let index = 0
-            data.forEach((e)=> {
-              tempItems.push({
-                id: index++,
-                dbn: e.dbn,
-                school_name: e.school_name,
-              })
-              tempComp[e.school_name] = e.dbn
-    
-            }
-            )
-            setItems(tempItems)
-            setCompItems(tempComp)
-            setJSON(data)
-            setLoading(false)
-          })
-          .catch(err => console.log("API ERROR: ", err));
-          // fetch for all of user's review
-      }, [])
+       
+      }, [url])
 
     // Catch Rating value
     const handleRating = (event, rate) => {
@@ -112,7 +147,7 @@ export default function Review() {
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-            alert('Review submitted successfully!');
+            window.open('/profile', '_self');
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -139,42 +174,66 @@ export default function Review() {
       console.log('Focused')
     }
 
+    const handleDropdown = (schoolGrade, url) => {
+        console.log(url, schoolGrade);
+        setSchoolGrade(schoolGrade);
+        setUrl(url);
+        setSelectedSchools(null);
+    };
+
     // Review card display by School
   
     return (
         <div className="col-3 text-center m-auto">
             <h1>Submit a Review</h1>
-            <form className="input-large" onSubmit={ (e) => submission(e) }>
-                <div className="form-group inputSetting">
-                    <ReactSearchAutocomplete 
-                        items={items}
-                        onSearch={handleOnSearch}
-                        onSelect={handleOnSelect}
-                        onFocus={handleOnFocus}
-                        fuseOptions={{ keys:["school_name"] }}
-                        resultStringKeyName= "school_name"
-                        styling ={styles}
-                        placeholder="Search School Name"
-                        autoFocus
-                    />
+            <SchoolDropdown 
+              schoolGrade={(schoolGrade, url) => handleDropdown(schoolGrade, url)}
+            />
+            {
+                schoolGrade?
+                <form className="input-large" onSubmit={ (e) => submission(e) }>
+                    <InputForm items = {items}  compItems = {compItems} schoolGrade={schoolGrade}/>
+                    {schoolNameError && <Alert className=" mt-2 mb-auto" variant="danger">{schoolNameError}</Alert>}
+                    <div className="form-group">
+                        <label for="description">Description</label>
+                        <textarea className="form-control" id="description" rows="10"></textarea>
+                    </div>
+                    {descriptionError && <Alert className=" mt-2 mb-auto" variant="danger">{descriptionError}</Alert>}
+                    <div className="form-group">
+                        <p>Rating</p>
+                        <Rating
+                        name="simple-controlled"
+                        value={rating}
+                        onChange={handleRating}
+                        />
+                    </div>
+                    {ratingError && <Alert className=" mt-2 mb-auto" variant="danger">{ratingError}</Alert>}
+                    <button type="submit" className="btn btn-primary btn-lg">Submit</button>
+                </form>    
+                :
+                <div className=" container-fluid text-center ">
+                    <p>Please select a school option.</p>
+                    {
+                        /*
+                        <div className="form-group inputSetting">
+                            <ReactSearchAutocomplete 
+                                items={items}
+                                onSearch={handleOnSearch}
+                                onSelect={handleOnSelect}
+                                onFocus={handleOnFocus}
+                                fuseOptions={{ keys:["school_name"] }}
+                                resultStringKeyName= "school_name"
+                                styling ={styles}
+                                placeholder="Search School Name"
+                                autoFocus
+                            />
+                        </div>
+                        */
+                     }
                 </div>
-                {schoolNameError && <Alert className=" mt-2 mb-auto" variant="danger">{schoolNameError}</Alert>}
-                <div className="form-group">
-                    <label for="description">Description</label>
-                    <textarea className="form-control" id="description" rows="10"></textarea>
-                </div>
-                {descriptionError && <Alert className=" mt-2 mb-auto" variant="danger">{descriptionError}</Alert>}
-                <div className="form-group">
-                    <p>Rating</p>
-                    <Rating
-                    name="simple-controlled"
-                    value={rating}
-                    onChange={handleRating}
-                    />
-                </div>
-                {ratingError && <Alert className=" mt-2 mb-auto" variant="danger">{ratingError}</Alert>}
-                <button type="submit" className="btn btn-primary btn-lg">Submit</button>
-            </form>    
+               
+            }
+            
           
         </div>
     );

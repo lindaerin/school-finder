@@ -17,4 +17,7 @@
     text-decoration: none;
     color: #9877fc;
   }
-  
+  .about-btn{
+    background-color: #784cfc !important;
+    color: white !important;
+}

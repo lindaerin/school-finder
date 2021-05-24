@@ -85,7 +85,7 @@ function Card({ name, id, bookmark, userID, location, secondColumn, thirdColumn}
           <div className="col"><p>{secondColumn ? secondColumn : "No subway here"}</p></div>
           <div className="dropdown-divider"></div>
           <div className="col"><p>{thirdColumn} </p></div>
-          <button className="btn"  type="button"  
+          <button className="btn home-btn"  type="button"  
                         aria-haspopup="true" aria-expanded="true">
                     <a style={{color:"white"}} href={`/school/${id}`} target="_blank"  rel="noreferrer">Show more info</a>
                     <span className="caret"></span>

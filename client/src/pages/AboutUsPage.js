@@ -26,7 +26,7 @@ function AboutUsPage(props) {
                 ac sit amet eros. Sed nec purus non metus sagittis dapibus. Nulla facilisi. In diam est, interdum in varius eu, tincidunt sed mi. 
                 Etiam pellentesque dignissim fringilla. Integer bibendum sem lectus, rutrum pharetra dui sollicitudin nec. 
               </p>
-                <button type="button" onClick={handleClick} class="btn btn-light px-5 rounded-pill shadow-sm">
+                <button type="button" onClick={handleClick} class="btn about-btn btn-light px-5 rounded-pill shadow-sm">
                 Try it out
               </button>
             </div>

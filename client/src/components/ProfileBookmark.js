@@ -51,7 +51,7 @@ function Bookmark({schoolName, schoolID, userID}) {
         </div>
         
         <div className="card-body card-text text-center ">
-          <button className="btn" type="button"  
+          <button className="btn home-btn" type="button"  
                         aria-haspopup="true" aria-expanded="true">
                     <a style={{color:"white"}} href={`/school/${schoolID}`} target="_blank"  rel="noreferrer">Show more info</a>
                     <span className="caret"></span>
