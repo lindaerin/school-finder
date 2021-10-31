@@ -3,11 +3,6 @@ Developed a web application which NYC families can use to find and narrow their 
 
 ## Stack
 
-*API*
-
-- express.js
-- sequelize.js
-
 *React client*
 
 - Built using `create-react-app` and configured to work with the api.
@@ -65,23 +60,6 @@ Developed a web application which NYC families can use to find and narrow their 
 ## Dev Setup
 
 Each team member will need to do this on their local machine.
-
-### Create a postgres db
-
-Create a user in postgres named `ctp_user` with the password `ctp_pass`:
-
-> This only needs to be done one time on your machine
-> You can create additional users if you want to.
-
-```
-createuser -P -s -e ctp_user
-```
-
-Create a separate db for this project:
-
-```
-createdb -h localhost -U ctp_user app2019_development
-```
 
 ### Running the app
 
