@@ -1,5 +1,5 @@
-# Project Starter
-A starter repo for building CUNY Tech Prep projects with React, Express.js, and Sequelize.js
+# School Finder
+Developed a web application which NYC families can use to find and narrow their choice of public schools from elementary school to high school using React, Express.js, and Sequelize.js
 
 ## Stack
 
@@ -83,10 +83,6 @@ Create a separate db for this project:
 createdb -h localhost -U ctp_user app2019_development
 ```
 
-> You will create a DB for each project you start based on this repo. For other projects change `app2019_development` to the new apps database name.
-
-*For more details see this [installing postgres guide](https://github.com/CUNYTechPrep/ctp2019/blob/master/guides/installing-postgresql.md)*
-
 ### Running the app
 
 For local development you will need two terminals open, one for the api-backend and another for the react-client.
@@ -109,43 +105,3 @@ npm start
 
 - api-backend will launch at: http://localhost:8080
 - react-client will launch at: http://localhost:3000
-
-> In production you will only deploy a single app. The react client will build into static files that will be served from the backend.
-
-## Deployment
-
-### Setting up Heroku
-
-Install the heroku cli if you don't already have it.
-
-> You will also need a heroku account
-> And this will only be done once on your machine
-
-```bash
-# on mac
-brew install heroku/brew/heroku
-heroku login
-```
-
-### Create a Heroku project
-
-Next, `cd` into this project directory and create a project:
-
-```bash
-heroku create cool-appname
-heroku addons:create heroku-postgresql:hobby-dev
-```
-
-> This will deploy your apps to https://cool-appname.herokuapp.com, assuming that it is not taken already.
-
-> You only need to do this once per app
-
-### Deploying the app
-
-Whenever you want to update the app run this command.
-
-```bash
-git push heroku main
-```
-
-> This command deploys your main branch. You can change that and deploy a different branch such as: `git push heroku development`
